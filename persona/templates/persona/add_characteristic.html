@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Multichoice Home{% endblock title %}
+
+{% block content %}
+<p><a href="{% url 'persona:home' %}">Return to home</a></p>
+<h1>Add characteristic</h1>
+<form method='POST'>{% csrf_token %}
+  {{ form.as_p }}
+  <input type='submit' value='Add characteristic'>
+</form>
+{% endblock content %}

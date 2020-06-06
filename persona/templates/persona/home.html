@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Multichoice Home{% endblock title %}
+
+{% block content %}
+<h1>Multichoice Home</h1>
+<p>This is the home view of the multichoice project site</p>
+<ol>
+  <li>First of all, you need to run <code>python3 manage.py makemigrations persona</code>
+      and <code>python3 manage.py migrate</code>, if you haven't already. </li>
+  <li>Once you're up and running, start by <a href="{% url 'persona:add_characteristic' %}">adding some characteristics</a>.</li>
+  <li>Once you've added a few characteristics, follow this <a href="{% url 'persona:add_persona' %}">link for adding a persona</a>.</li>
+  <li>On the 'add persona' screen, you should be able to use a multiple checkbox input for choosing characteristics to link to the persona.</li>
+  <li>When you've added a few personas, you can come back here and you should be able to see them below</li>
+</ol>
+<p><a href="{% url 'persona:add_characteristic' %}">Add characteristic</a></p>
+<p><a href="{% url 'persona:add_persona' %}">Add persona</a></p>
+
+{% if personas %}
+<h2>Already added personas</h2>
+<ul>
+    {% for persona in personas %}
+      <li>{{ persona.name }}
+        {% if persona.characteristics.all %}
+        <ul>
+        {% for characteristic in persona.characteristics.all %}
+          <li><small>{{ characteristic.name }}</small></li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+      </li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endblock content %}
